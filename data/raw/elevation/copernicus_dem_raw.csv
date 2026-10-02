@@ -1,0 +1,16 @@
+node_id,name,region,role,latitude,longitude,elevation_m,elevation_std_local_m,slope_degree,elevation_source
+LAD-A01,Western Valley Staging Point,LADAKH,REGIONAL_DEPOT,34.2,75.0,3172.0,414.55,29.83,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+LAD-A02,Pass Approach Transit Hub,LADAKH,TRANSIT_HUB,34.28,75.6,4613.0,246.91,15.03,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+LAD-A03,Central Mountain Forward Base,LADAKH,FORWARD_DEPOT,34.55,76.13,2697.0,138.46,7.37,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+LAD-A04,High Ridge Relay Station,LADAKH,TACTICAL_NODE,34.35,76.85,3618.0,134.49,7.72,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+LAD-A05,Eastern Plateau Terminal,LADAKH,MAIN_HUB,34.15,77.58,3411.0,73.77,4.64,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+SIK-B01,Foothill Logistics Junction,SIKKIM,REGIONAL_DEPOT,26.72,88.42,119.0,3.19,0.21,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+SIK-B02,Gorge Entry Transit Center,SIKKIM,TRANSIT_HUB,26.88,88.48,143.0,82.58,5.63,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+SIK-B03,Mid-Elevation River Relay,SIKKIM,FORWARD_DEPOT,27.15,88.5,899.0,220.65,13.91,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+SIK-B04,Eastern Valley Sector Node,SIKKIM,TACTICAL_NODE,27.28,88.58,1322.0,206.53,9.03,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+SIK-B05,High Ridge Terminal,SIKKIM,MAIN_HUB,27.35,88.62,1864.0,270.45,19.36,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+RAJ-C01,Eastern Sector Supply Terminal,RAJASTHAN,REGIONAL_DEPOT,26.28,73.02,242.0,7.44,0.52,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+RAJ-C02,Central Arid Junction Hub,RAJASTHAN,TRANSIT_HUB,26.92,71.91,233.0,4.88,0.34,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+RAJ-C03,Western Dunes Forward Post,RAJASTHAN,FORWARD_DEPOT,26.91,70.91,242.0,7.55,0.49,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+RAJ-C04,Southern Desert Corridor Relay,RAJASTHAN,TACTICAL_NODE,25.75,71.4,192.0,8.06,0.65,Copernicus DEM (GLO-90) via Open-Meteo Elevation API
+RAJ-C05,Southwestern Logistics Point,RAJASTHAN,MAIN_HUB,26.3,71.1,266.0,4.26,0.34,Copernicus DEM (GLO-90) via Open-Meteo Elevation API

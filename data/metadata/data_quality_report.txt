@@ -1,0 +1,95 @@
+================================================================================
+INDIAN ARMY LOGISTICS - PHASE 1 FINAL ENVIRONMENTAL & DATA QUALITY REPORT
+Generated At: 2026-10-02 15:45:16
+================================================================================
+
+1. DATASET FILE INVENTORY & ROW COUNTS
+--------------------------------------------------------------------------------
+  • weather_processed.csv          |   16440 rows |  25 cols |   3555.4 KB
+  • terrain_features.csv           |      15 rows |  12 cols |      2.6 KB
+  • road_network_features.csv      |      42 rows |  19 cols |      7.7 KB
+  • nodes.csv                      |      15 rows |  14 cols |      2.3 KB
+  • demand.csv                     |   82200 rows |  14 cols |   9105.5 KB
+  • inventory.csv                  |   82200 rows |  11 cols |   5874.8 KB
+  • fleet.csv                      |      80 rows |  11 cols |      7.4 KB
+  • routes.csv                     |      42 rows |  15 cols |      5.6 KB
+  • shipments.csv                  |   19381 rows |  20 cols |   4009.1 KB
+  • disruptions.csv                |    4844 rows |  11 cols |    605.9 KB
+  • demand_training.csv            |   79425 rows |  44 cols |  20987.9 KB
+  • travel_time_training.csv       |   19381 rows |  38 cols |   4792.3 KB
+  • shortage_risk_training.csv     |   81675 rows |  33 cols |  14414.0 KB
+  • data_dictionary.csv            |      46 rows |  10 cols |      8.3 KB
+  • data_source_register.csv       |       5 rows |  10 cols |      2.2 KB
+  • provenance_audit.csv           |      47 rows |   9 cols |     11.9 KB
+
+2. ENVIRONMENTAL & WEATHER SEVERITY CONSISTENCY CHECKS
+--------------------------------------------------------------------------------
+  [PASS] Weather Severity Formula Consistency (Independently Recomputed)
+         Details: Max deviation: 0.0000, Evaluated on 16440 node-days
+  [PASS] Node-Level Spatial Weather Variation within Regions
+         Details: Regional Temp StdDev: {'LADAKH': 11.503569851502522, 'RAJASTHAN': 6.681795377307283, 'SIKKIM': 11.831867779648814}
+  [PASS] Geographic Coordinates Validity (Nodes within India bounds)
+         Details: Total nodes: 15
+  [PASS] Primary Key Uniqueness (nodes.csv node_id)
+         Details: Unique IDs: 15/15
+  [PASS] Critical Fields Completeness (nodes.csv)
+
+3. SYNTHETIC SIMULATION & CONSERVATION INTEGRITY
+--------------------------------------------------------------------------------
+  [PASS] Non-Negative Demand Values
+         Details: Min final_demand: 67.1 kg
+  [PASS] Primary Key Uniqueness (demand.csv date x node_id x category)
+         Details: Duplicates found: 0
+  [PASS] Inventory Conservation Law (Closing = min(Cap, Opening + Received - Consumed))
+         Details: Max deviation: 0.0000 kg
+  [PASS] Non-Negative Closing Inventory
+         Details: Min closing inventory: 0.0 kg
+  [PASS] Chronological Continuity (Opening[t] == Closing[t-1])
+         Details: Max transition delta: 0.0000 kg
+  [PASS] Primary Key Uniqueness (shipments.csv shipment_id)
+         Details: Duplicates: 0
+  [PASS] Positive Shipment Quantities
+         Details: Min quantity: 1500.1 kg
+  [PASS] Payload Capacity Constraint (quantity <= vehicle capacity)
+         Details: Violations: 0
+  [PASS] Foreign Key Validity (shipment route_id in routes.csv)
+  [PASS] Causal Trip Progression (actual_arrival >= actual_departure)
+
+4. ML TRAINING DATASETS & LEAKAGE VERIFICATION
+--------------------------------------------------------------------------------
+  [PASS] Demand Training Dataset Completeness (Zero NaNs)
+         Details: Total rows: 79425
+  [PASS] Travel-Time Training Dataset Completeness (Zero NaNs)
+         Details: Total records: 19381
+  [PASS] Travel Time Planned vs Actual Distinction
+  [PASS] Shortage Risk Training Dataset Completeness (Zero NaNs)
+         Details: Total records: 81675
+  [PASS] Shortage Risk Label Balance
+         Details: Class 0: 51.2%, Class 1: 48.8%
+
+5. REALISM STATISTICS & OPERATIONAL DISTRIBUTIONS
+--------------------------------------------------------------------------------
+Disruption Events by Region & Event Type:
+  • LADAKH    : LANDSLIDE=150, ROAD_CLOSURE=696, SECURITY_RELATED_ROUTE_RESTRICTION=28, SNOW=596, TRANSPORT_CAPACITY_REDUCTION=25, VEHICLE_BREAKDOWN=19
+  • RAJASTHAN : SECURITY_RELATED_ROUTE_RESTRICTION=21, TRANSPORT_CAPACITY_REDUCTION=24, VEHICLE_BREAKDOWN=22
+  • SIKKIM    : LANDSLIDE=3078, ROAD_CLOSURE=84, SECURITY_RELATED_ROUTE_RESTRICTION=22, SNOW=34, TRANSPORT_CAPACITY_REDUCTION=24, VEHICLE_BREAKDOWN=21
+
+Travel Time & Delay by Region:
+  • LADAKH    : Planned=6.10h | Actual=9.82h | Avg Delay=3.97h | Delayed Convoys=98.8%
+  • SIKKIM    : Planned=2.20h | Actual=5.50h | Avg Delay=3.54h | Delayed Convoys=70.0%
+  • RAJASTHAN : Planned=3.07h | Actual=3.21h | Avg Delay=0.39h | Delayed Convoys=27.7%
+
+Stock-Out Rate by Supply Category:
+  • FOOD             : Stockout=27.81% | Below Critical Buffer=40.7%
+  • WATER            : Stockout=33.22% | Below Critical Buffer=45.9%
+  • FUEL             : Stockout=31.58% | Below Critical Buffer=45.6%
+  • MEDICAL          : Stockout=21.37% | Below Critical Buffer=29.8%
+  • GENERAL_SUPPLIES : Stockout=30.54% | Below Critical Buffer=41.7%
+
+6. VALIDATION SUMMARY
+--------------------------------------------------------------------------------
+Total Integrity Checks Run : 20
+Checks Passed              : 20
+Checks Failed              : 0
+Overall Quality Status     : ALL CHECKS PASSED (100%)
+================================================================================

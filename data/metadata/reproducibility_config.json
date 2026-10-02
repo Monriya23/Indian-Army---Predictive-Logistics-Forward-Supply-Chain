@@ -1,0 +1,111 @@
+{
+  "project": "Indian Army - Predictive Logistics & Forward Supply Chain (SIH 2026)",
+  "phase": "Phase 1 - Real-World Data Acquisition & Conditioned Synthetic Logistics Data Generation",
+  "timestamp_utc": "2026-10-02T10:15:16.881545Z",
+  "random_seed": 42,
+  "temporal_bounds": {
+    "start_date": "2022-01-01",
+    "end_date": "2024-12-31",
+    "total_days_per_region": 1096
+  },
+  "python_environment": {
+    "python_version": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32"
+  },
+  "supply_categories": [
+    "FOOD",
+    "WATER",
+    "FUEL",
+    "MEDICAL",
+    "GENERAL_SUPPLIES"
+  ],
+  "vehicle_classes": [
+    "LIGHT",
+    "MEDIUM",
+    "HEAVY"
+  ],
+  "study_regions": [
+    {
+      "region_id": "LADAKH",
+      "name": "Ladakh / Western Himalayas",
+      "corridor": "Srinagar - Kargil - Leh Public Highway (NH-1)"
+    },
+    {
+      "region_id": "SIKKIM",
+      "name": "Sikkim / Eastern Himalayas",
+      "corridor": "Siliguri - Sevoke - Singtam - Gangtok Public Corridor (NH-10)"
+    },
+    {
+      "region_id": "RAJASTHAN",
+      "name": "Rajasthan / Western Desert",
+      "corridor": "Jodhpur - Pokhran - Jaisalmer - Barmer Public Corridor"
+    }
+  ],
+  "dataset_checksums": {
+    "weather_processed": {
+      "path": "processed\\weather_processed.csv",
+      "size_bytes": 3640718,
+      "sha256": "51676f7c822c280fbc7282e440c34a15f99577c727551a6cc0d94abe22da4463"
+    },
+    "terrain_features": {
+      "path": "processed\\terrain_features.csv",
+      "size_bytes": 2657,
+      "sha256": "6c677e7caca4f90620630c3ec71511266f57441b03700cb6c1e8a821bd5a8990"
+    },
+    "road_network_features": {
+      "path": "processed\\road_network_features.csv",
+      "size_bytes": 7922,
+      "sha256": "cd7a47b6bca02b8f684abf0e5d6e40d425aada3e95f2387c63858ec8c1f73d05"
+    },
+    "nodes": {
+      "path": "synthetic\\nodes.csv",
+      "size_bytes": 2369,
+      "sha256": "f309488eab0ca52efecfb554bb507a352804584ba03621b681c00c6714eba4e1"
+    },
+    "demand": {
+      "path": "synthetic\\demand.csv",
+      "size_bytes": 9324000,
+      "sha256": "985912f5d2acf1742bca22f4f7f4491e017b380ab23a7edfc69295462386c505"
+    },
+    "inventory": {
+      "path": "synthetic\\inventory.csv",
+      "size_bytes": 6015766,
+      "sha256": "835d780ac1ebb8bc55202beb20e94f92dedfc21065bade32662e49af1fece295"
+    },
+    "fleet": {
+      "path": "synthetic\\fleet.csv",
+      "size_bytes": 7593,
+      "sha256": "4ea7bfdea2695b05c0d8c794b22e280ef15e0cbad4a7b36232dd46367fef3bde"
+    },
+    "routes": {
+      "path": "synthetic\\routes.csv",
+      "size_bytes": 5712,
+      "sha256": "150f4a9a22c3d53b9a217a1a61b162b1dc33b3ee588a493bd57704fef378468b"
+    },
+    "shipments": {
+      "path": "synthetic\\shipments.csv",
+      "size_bytes": 4105338,
+      "sha256": "bccfe91fbaa90260a64dba2df0a1576e895ef73b6567f7d06255b96cecfe8527"
+    },
+    "disruptions": {
+      "path": "synthetic\\disruptions.csv",
+      "size_bytes": 620411,
+      "sha256": "75632803718629f95863de7cfa470913d05f041a3377fd845ac5e3fda0c730fe"
+    },
+    "demand_training": {
+      "path": "training\\demand_training.csv",
+      "size_bytes": 21491629,
+      "sha256": "b720844a035008e0369d862a52e8a7389ab08a836cb31f12914bc5266007c577"
+    },
+    "travel_time_training": {
+      "path": "training\\travel_time_training.csv",
+      "size_bytes": 4907322,
+      "sha256": "f6fb0b1bf20273adcdde502ecdf55278c5cacb6d9610c3d35d57ee42f5478dc8"
+    },
+    "shortage_risk_training": {
+      "path": "training\\shortage_risk_training.csv",
+      "size_bytes": 14759938,
+      "sha256": "37c87d04a021f719b87bb8ee7e3b1ef5273276bc6ae37461598b8e80dc459dee"
+    }
+  }
+}

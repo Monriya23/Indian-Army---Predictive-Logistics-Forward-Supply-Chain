@@ -1,0 +1,47 @@
+table_name,column_name,description,data_type,unit,source_name,source_url,source_type,generation_method,used_by_model
+weather_processed.csv,date,Observation date in ISO format,string (YYYY-MM-DD),date,NASA POWER,https://power.larc.nasa.gov/,PUBLIC_REAL,API Acquisition & Standardization,All Models
+weather_processed.csv,region,Geographical study region identifier,string,category,Configuration,N/A,PUBLIC_REAL,Config Definition,All Models
+weather_processed.csv,temperature_c,Daily mean 2m ambient air temperature,float,deg C,NASA POWER,https://power.larc.nasa.gov/,PUBLIC_REAL,Direct Measurement / Reanalysis,"Demand, Travel Time, Shortage"
+weather_processed.csv,precipitation_mm,Daily total corrected precipitation,float,mm/day,NASA POWER,https://power.larc.nasa.gov/,PUBLIC_REAL,Direct Measurement / Reanalysis,"Demand, Travel Time, Shortage"
+weather_processed.csv,snowfall_cm,Derived fresh snowfall accumulation,float,cm/day,NASA POWER,https://power.larc.nasa.gov/,DERIVED,Physical condition: precip * 1.0 when temp <= 0.5 C,"Demand, Travel Time, Shortage"
+weather_processed.csv,wind_speed_kmh,10-meter wind speed converted to km/h,float,km/h,NASA POWER,https://power.larc.nasa.gov/,DERIVED,Unit conversion: WS10M * 3.6,"Travel Time, Disruptions"
+weather_processed.csv,rainfall_3d,3-day rolling precipitation accumulation,float,mm,NASA POWER,https://power.larc.nasa.gov/,DERIVED,Rolling sum window=3,"Shortage, Travel Time, Disruptions"
+weather_processed.csv,rainfall_7d,7-day rolling precipitation accumulation,float,mm,NASA POWER,https://power.larc.nasa.gov/,DERIVED,Rolling sum window=7,"Shortage, Demand"
+weather_processed.csv,temperature_7d_avg,7-day rolling average temperature,float,deg C,NASA POWER,https://power.larc.nasa.gov/,DERIVED,Rolling mean window=7,Demand Forecasting
+weather_processed.csv,weather_severity,Composite normalized weather severity index,float [0.0 - 1.0],index,NASA POWER,https://power.larc.nasa.gov/,DERIVED,"Weighted combination of sub-zero temp, extreme heat, rain, snow, wind",All Models
+weather_processed.csv,extreme_weather_indicator,Binary flag for severe weather conditions,"integer [0, 1]",binary flag,NASA POWER,https://power.larc.nasa.gov/,DERIVED,Threshold rule on severity and extreme values,All Models
+terrain_features.csv,node_id,Unique identifier of fictional logistics node,string,identifier,Simulation,N/A,SYNTHETIC,Config Hierarchy,All Models
+terrain_features.csv,elevation_m,Elevation above mean sea level,float,metres,Copernicus DEM (GLO-90),https://dataspace.copernicus.eu/,PUBLIC_REAL,DEM 90m Sampling,"Travel Time, Demand, Shortage"
+terrain_features.csv,slope_degree,Approximate terrain gradient slope,float,degrees,Copernicus DEM (GLO-90),https://dataspace.copernicus.eu/,DERIVED,Finite difference spatial elevation derivative,Travel Time
+terrain_features.csv,terrain_difficulty,Composite terrain difficulty score,float [0.0 - 1.0],index,Copernicus DEM (GLO-90),https://dataspace.copernicus.eu/,DERIVED,"Normalized altitude, slope, and variance combination",All Models
+terrain_features.csv,terrain_type,Biogeographical terrain classification,string,category,Geographical Reference,N/A,PUBLIC_REAL,Regional Classification,All Models
+road_network_features.csv,route_id,Unique identifier of public transportation link,string,identifier,OSM / Simulation,https://www.openstreetmap.org/,DERIVED,Graph Topology Node Pair,"Travel Time, Shipments"
+road_network_features.csv,distance_km,Public driving distance along highway,float,km,OpenStreetMap / OSRM,https://www.openstreetmap.org/,PUBLIC_REAL,OSRM Routing & Road Network Extraction,Travel Time Prediction
+road_network_features.csv,elevation_change_m,Absolute elevation delta between endpoints,float,metres,Copernicus DEM (GLO-90),https://dataspace.copernicus.eu/,DERIVED,|dest_elevation - source_elevation|,Travel Time Prediction
+road_network_features.csv,road_connectivity,Average topological degree of route endpoints,float,count,NetworkX Analysis,N/A,DERIVED,Graph Degree Centrality,"Travel Time, Shortage"
+road_network_features.csv,alternative_path_count,Redundant paths available between nodes,integer,count,NetworkX Analysis,N/A,DERIVED,Graph Simple Paths Cutoff=4,"Travel Time, Route Reliability"
+road_network_features.csv,route_accessibility,Composite accessibility score based on road class & lanes,float [0.0 - 1.0],index,OSM / DEM,N/A,DERIVED,"Weighted lanes, surface, terrain difficulty formula","Shortage, Travel Time"
+road_network_features.csv,route_reliability,Baseline route reliability score,float [0.0 - 1.0],index,OSM / DEM / NetworkX,N/A,DERIVED,Accessibility + Redundancy factor,"Travel Time, Shortage Risk"
+nodes.csv,node_id,Fictional node identifier (e.g. LAD-A01),string,identifier,Simulation,N/A,SYNTHETIC,Synthetic Fictional Designation,All Models
+nodes.csv,storage_capacity_kg,Total warehouse payload storage capacity,float,kg,Simulation,N/A,SYNTHETIC,Assigned by node strategic role hierarchy,"Inventory, Shortage"
+nodes.csv,criticality_level,"Strategic priority level (1=lowest, 5=highest)",integer [1-5],score,Simulation,N/A,SYNTHETIC,Role Hierarchy,Shortage Risk
+demand.csv,final_demand,Simulated daily demand quantity,float,kg/day,Simulation,N/A,SYNTHETIC,Causal formula: Base * Season * Temp * Weather * Scenario + Noise,Demand Forecasting
+demand.csv,actual_consumption,Actual daily supply consumed,float,kg/day,Simulation,N/A,SYNTHETIC,final_demand * consumption_ratio,"Inventory, Shortage"
+inventory.csv,opening_inventory,Stock on hand at start of day,float,kg,Simulation,N/A,SYNTHETIC,Closing inventory of day t-1,Shortage Risk
+inventory.csv,received_quantity,Supplies received via arrived shipments,float,kg,Simulation,N/A,SYNTHETIC,Sum of arrived shipments on date,"Inventory, Shortage"
+inventory.csv,closing_inventory,Stock on hand at close of day,float,kg,Simulation,N/A,SYNTHETIC,opening + received - consumed,"Inventory, Shortage"
+inventory.csv,days_of_supply,Estimated remaining days of supply,float,days,Simulation,N/A,SYNTHETIC,closing_inventory / consumption,Shortage Risk
+inventory.csv,shortage_flag,Indicator of stock depletion or critical threshold breach,"integer [0, 1]",binary flag,Simulation,N/A,SYNTHETIC,1 if closing <= critical_threshold else 0,Shortage Risk Target
+fleet.csv,vehicle_id,Abstract vehicle identifier,string,identifier,Simulation,N/A,SYNTHETIC,Synthetic Class Identifier,"Shipments, Travel Time"
+fleet.csv,capacity_kg,Maximum physical cargo payload capacity,float,kg,Simulation,N/A,SYNTHETIC,"Abstract class specification (2500, 7500, 16000)","Shipments, Travel Time"
+shipments.csv,shipment_id,Unique shipment identifier,string,identifier,Simulation,N/A,SYNTHETIC,Sequential ID,Travel Time Prediction
+shipments.csv,planned_travel_time_hr,Scheduled travel time based on road & vehicle speed,float,hours,Simulation,N/A,SYNTHETIC,normal_travel_time / vehicle_speed_factor,Travel Time Feature
+shipments.csv,actual_travel_time_hr,"Realized travel time including weather, terrain, and disruption delays",float,hours,Simulation,N/A,SYNTHETIC,planned_travel_time * env_mult * terrain_mult * dis_mult,Travel Time Target
+shipments.csv,delay_hours,Total shipment delay beyond schedule,float,hours,Simulation,N/A,SYNTHETIC,"max(0, actual_arrival - planned_arrival)",Evaluation
+disruptions.csv,event_id,Unique disruption event identifier,string,identifier,Simulation,N/A,SYNTHETIC,Sequential ID,"Travel Time, Shipments"
+disruptions.csv,event_type,High-level non-sensitive disruption type,string,category,Simulation,N/A,SYNTHETIC,Conditioned on weather thresholds and background probability,"Travel Time, Shipments"
+disruptions.csv,travel_time_multiplier,Factor by which route travel time increases during event,float [1.0 - 6.0],multiplier,Simulation,N/A,SYNTHETIC,Conditioned on event severity,Travel Time Feature
+demand_training.csv,demand_next_day,Target: Next-day demand (t+1),float,kg/day,Simulation,N/A,SYNTHETIC,shift(-1) on final_demand,Demand Model Target 1
+demand_training.csv,demand_next_7_days,Target: Cumulative next 7 days demand (t+1 to t+7),float,kg/7-days,Simulation,N/A,SYNTHETIC,rolling sum window=7 on shift(-1),Demand Model Target 2
+demand_training.csv,lag_1,Demand from previous day (t-1),float,kg/day,Simulation,N/A,SYNTHETIC,shift(1) on final_demand,Demand Feature
+shortage_risk_training.csv,shortage_in_next_7_days,Target: Binary flag if shortage occurs within next 7 days,"integer [0, 1]",binary label,Simulation,N/A,SYNTHETIC,max(shortage_flag[t+1 : t+7]),Shortage Risk Model Target
